@@ -1,4 +1,6 @@
-package it.unibo.mvc;
+package it.unibo.mvc.api;
+
+import it.unibo.mvc.impl.DrawResult;
 
 /**
  *

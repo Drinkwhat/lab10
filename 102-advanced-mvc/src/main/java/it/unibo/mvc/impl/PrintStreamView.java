@@ -1,12 +1,12 @@
-/**
- * 
- */
-package it.unibo.mvc;
+package it.unibo.mvc.impl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+
+import it.unibo.mvc.api.DrawNumberView;
+import it.unibo.mvc.api.DrawNumberViewObserver;
 
 /**
  * This class implements a view that can write on any PrintStream.
@@ -56,6 +56,11 @@ public final class PrintStreamView implements DrawNumberView {
     @Override
     public void result(final DrawResult res) {
         out.println(res.getDescription());
+    }
+
+    @Override
+    public void displayError(final String message) {
+        System.err.println(message); // NOPMD
     }
 
 }

@@ -1,4 +1,4 @@
-package it.unibo.mvc;
+package it.unibo.mvc.impl;
 
 
 /**
@@ -110,5 +110,13 @@ public final class Configuration {
             return new Configuration(max, min, attempts);
         }
     }
-}
 
+    @Override
+    public String toString() {
+        return "Configuration{" +
+                "max=" + max +
+                ", min=" + min +
+                ", attempts=" + attempts +
+                '}';
+    }
+}
