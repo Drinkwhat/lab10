@@ -2,7 +2,8 @@ package it.unibo.oop.lab.lambda;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -59,11 +60,10 @@ public final class LambdaUtilities {
      *         otherwise.
      */
     public static <T> List<Optional<T>> optFilter(final List<T> list, final Predicate<T> pre) {
-        final List<Optional<T>> l = new ArrayList<>();
-        list.forEach(e -> {
-            l.add(Optional.ofNullable(e).filter(pre));
-        });
-        return l;
+        // list.stream().map(Optional::ofNullable).map(it -> it.filter(pre)).toList();
+        final List<Optional<T>> result = new ArrayList<>();
+        list.forEach(e -> result.add(Optional.ofNullable(e).filter(pre)));
+        return result;
     }
 
     /**
@@ -79,15 +79,18 @@ public final class LambdaUtilities {
      *         based on the mapping done by the function
      */
     public static <R, T> Map<R, Set<T>> group(final List<T> list, final Function<T, R> op) {
-        final Map<R, Set<T>> map = new HashMap<>();
-        list.forEach(e -> {
-            final R key = op.apply(e); 
-            map.merge(key, Set.of(e), (oldSet, newSet) -> {
-                final Set<T> combinedSet = new HashSet<>(oldSet);
-                combinedSet.addAll(newSet);
-                return combinedSet;
-            }); 
-        });
+        final Map<R, Set<T>> map = new LinkedHashMap<>();
+        list.forEach(e -> 
+            map.merge(
+                op.apply(e),
+                Set.of(e),
+                (oldSet, newSet) -> {
+                    final Set<T> combinedSet = new LinkedHashSet<>(oldSet);
+                    combinedSet.addAll(newSet);
+                    return combinedSet;
+                }
+            )
+        );
         return map;
     }
 
@@ -104,10 +107,8 @@ public final class LambdaUtilities {
      *         by the supplier
      */
     public static <K, V> Map<K, V> fill(final Map<K, Optional<V>> map, final Supplier<V> def) {
-        final Map<K, V> res = new HashMap<>();
-        map.forEach((key, value) -> {
-            res.put(key, value.orElse(def.get()));
-        });
+        final Map<K, V> res = new LinkedHashMap<>();
+        map.forEach((key, value) -> res.put(key, value.orElseGet(def)));
         return res;
     }
 
