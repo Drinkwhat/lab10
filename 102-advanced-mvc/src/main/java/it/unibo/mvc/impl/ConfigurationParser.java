@@ -30,6 +30,7 @@ public class ConfigurationParser {
                     case "maximum" -> max = Integer.parseInt(value);
                     case "attempts" -> attempts = Integer.parseInt(value);
                     default -> {
+                        System.out.println("Unknown configuration key: " + key);
                     }
                 }
             }
