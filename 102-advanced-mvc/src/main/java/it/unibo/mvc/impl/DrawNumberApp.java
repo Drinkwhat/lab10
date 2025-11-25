@@ -7,6 +7,9 @@ import java.util.List;
 import it.unibo.mvc.api.DrawNumber;
 import it.unibo.mvc.api.DrawNumberView;
 import it.unibo.mvc.api.DrawNumberViewObserver;
+import it.unibo.mvc.impl.views.DrawNumberViewImpl;
+import it.unibo.mvc.impl.views.PrintStreamView;
+import it.unibo.mvc.impl.views.StandardOutputView;
 
 /**
  */
@@ -69,7 +72,7 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
      * @throws FileNotFoundException 
      */
     public static void main(final String... args) throws FileNotFoundException {
-        new DrawNumberApp(new DrawNumberViewImpl());
+        new DrawNumberApp(new DrawNumberViewImpl(), new PrintStreamView("game.log"), new StandardOutputView());
     }
 
 }
