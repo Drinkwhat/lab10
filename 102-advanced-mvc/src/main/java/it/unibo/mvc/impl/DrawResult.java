@@ -2,7 +2,6 @@ package it.unibo.mvc.impl;
 
 /**
  * Possible outcomes of a guess.
- * 
  * Here implemented as enum, but a configuration file would be MUCH more effective.
  */
 public enum DrawResult {

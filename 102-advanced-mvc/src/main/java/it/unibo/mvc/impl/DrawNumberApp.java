@@ -7,9 +7,10 @@ import java.util.List;
 import it.unibo.mvc.api.DrawNumber;
 import it.unibo.mvc.api.DrawNumberView;
 import it.unibo.mvc.api.DrawNumberViewObserver;
-import it.unibo.mvc.impl.views.DrawNumberViewImpl;
-import it.unibo.mvc.impl.views.PrintStreamView;
-import it.unibo.mvc.impl.views.StandardOutputView;
+import it.unibo.mvc.impl.view.DrawNumberViewImpl;
+import it.unibo.mvc.impl.view.PrintStreamView;
+import it.unibo.mvc.impl.view.StandardOutputView;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  */
@@ -20,19 +21,19 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
 
     /**
      * @param views
-     *            the views to attach
+     *              the views to attach
      */
     public DrawNumberApp(final DrawNumberView... views) {
         /*
          * Side-effect proof
          */
         this.views = Arrays.asList(Arrays.copyOf(views, views.length));
-        for (final DrawNumberView view: views) {
+        for (final DrawNumberView view : views) {
             view.setObserver(this);
             view.start();
         }
         final Configuration config = ConfigurationParser.parseConfiguration();
-        System.out.println(config);
+        System.out.println(config); // NOPMD debugging
         this.model = new DrawNumberImpl(config.getMin(), config.getMax(), config.getAttempts());
     }
 
@@ -40,11 +41,11 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
     public void newAttempt(final int n) {
         try {
             final DrawResult result = model.attempt(n);
-            for (final DrawNumberView view: views) {
+            for (final DrawNumberView view : views) {
                 view.result(result);
             }
-        } catch (IllegalArgumentException e) {
-            for (final DrawNumberView view: views) {
+        } catch (final IllegalArgumentException e) {
+            for (final DrawNumberView view : views) {
                 view.numberIncorrect();
             }
         }
@@ -55,6 +56,10 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
         this.model.reset();
     }
 
+    @SuppressFBWarnings(
+        value = "DM_EXIT",
+        justification = "This System.exit(0) is required for exercise"
+    )
     @Override
     public void quit() {
         /*
@@ -67,12 +72,11 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
     }
 
     /**
-     * @param args
-     *            ignored
-     * @throws FileNotFoundException 
+     * @param args ignored
+     * 
+     * @throws FileNotFoundException File doesn't exist
      */
     public static void main(final String... args) throws FileNotFoundException {
         new DrawNumberApp(new DrawNumberViewImpl(), new PrintStreamView("game.log"), new StandardOutputView());
     }
-
 }

@@ -4,7 +4,10 @@ import it.unibo.mvc.api.DrawNumberView;
 import it.unibo.mvc.api.DrawNumberViewObserver;
 import it.unibo.mvc.impl.DrawResult;
 
-public class StandardOutputView implements DrawNumberView {
+/**
+ * standard output {@link DrawNumberView} implementation.
+ */
+public final class StandardOutputView implements DrawNumberView {
 
     @Override
     public void setObserver(final DrawNumberViewObserver observer) {
@@ -20,7 +23,7 @@ public class StandardOutputView implements DrawNumberView {
          */
     }
 
-        @Override
+    @Override
     public void numberIncorrect() {
         System.out.println("You must enter a number"); // NOPMD: exercises require
     }

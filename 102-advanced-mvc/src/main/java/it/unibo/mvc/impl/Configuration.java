@@ -54,20 +54,16 @@ public final class Configuration {
 
     /**
      * Pattern builder: used here because:
-     * <p>
      * - all the parameters of the Configuration class have a default value, which
      * means that we would like to have all the possible combinations of
      * constructors (one with three parameters, three with two parameters, three
      * with a single parameter), which are way too many and confusing to use
-     * <p>
      * - moreover, it would be impossible to provide all of them, because they are
      * all of the same type, and only a single constructor can exist with a given
      * list of parameter types.
-     * <p>
      * - the Configuration class has three parameters of the same type, and it is
      * unclear to understand, in a call to its constructor, which is which. By using
      * the builder, we emulate the so-called "named arguments".
-     * 
      */
     public static class Builder {
 
@@ -81,29 +77,29 @@ public final class Configuration {
         private boolean consumed;
 
         /**
-         * @param min the minimum value
+         * @param minimun the minimum value
          * @return this builder, for method chaining
          */
-        public Builder setMin(final int min) {
-            this.min = min;
+        public Builder setMin(final int minimun) {
+            this.min = minimun;
             return this;
         }
 
         /**
-         * @param max the maximum value
+         * @param maxium the maximum value
          * @return this builder, for method chaining
          */
-        public Builder setMax(final int max) {
-            this.max = max;
+        public Builder setMax(final int maxium) {
+            this.max = maxium;
             return this;
         }
 
         /**
-         * @param attempts the attempts count
+         * @param attemptsCount the attempts count
          * @return this builder, for method chaining
          */
-        public Builder setAttempts(final int attempts) {
-            this.attempts = attempts;
+        public Builder setAttempts(final int attemptsCount) {
+            this.attempts = attemptsCount;
             return this;
         }
 

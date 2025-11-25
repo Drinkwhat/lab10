@@ -52,7 +52,7 @@ public final class DrawNumberViewImpl implements DrawNumberView {
             public void actionPerformed(final ActionEvent e) {
                 try {
                     observer.newAttempt(Integer.parseInt(tNumber.getText()));
-                } catch (NumberFormatException exception) {
+                } catch (final NumberFormatException exception) {
                     JOptionPane.showMessageDialog(frame, "An integer please..");
                 }
             }
