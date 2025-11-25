@@ -1,9 +1,10 @@
-package it.unibo.mvc.impl.views;
+package it.unibo.mvc.impl.view;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 
 import it.unibo.mvc.api.DrawNumberView;
 import it.unibo.mvc.api.DrawNumberViewObserver;
@@ -32,7 +33,7 @@ public final class PrintStreamView implements DrawNumberView {
      * @throws FileNotFoundException 
      */
     public PrintStreamView(final String path) throws FileNotFoundException {
-        out = new PrintStream(new FileOutputStream(new File(path)));
+        out = new PrintStream(new FileOutputStream(new File(path)), true, StandardCharsets.UTF_8);
     }
 
     @Override

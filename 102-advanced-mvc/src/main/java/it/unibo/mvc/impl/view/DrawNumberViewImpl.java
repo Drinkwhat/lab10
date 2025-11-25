@@ -1,4 +1,4 @@
-package it.unibo.mvc.impl.views;
+package it.unibo.mvc.impl.view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -112,8 +112,6 @@ public final class DrawNumberViewImpl implements DrawNumberView {
         case YOU_LOST:
             JOptionPane.showMessageDialog(frame, res.getDescription() + NEW_GAME, "Lost", JOptionPane.WARNING_MESSAGE);
             break;
-        default:
-            throw new IllegalStateException("Unexpected result: " + res);
         }
         observer.resetGame();
     }
@@ -123,7 +121,7 @@ public final class DrawNumberViewImpl implements DrawNumberView {
     }
 
     @Override
-    public void displayError(String message) {
+    public void displayError(final String message) {
         JOptionPane.showMessageDialog(frame, message);
     }
 }
