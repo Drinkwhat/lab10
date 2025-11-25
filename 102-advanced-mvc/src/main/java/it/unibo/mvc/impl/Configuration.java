@@ -1,6 +1,5 @@
 package it.unibo.mvc.impl;
 
-
 /**
  * Encapsulates the concept of configuration.
  */
@@ -44,20 +43,29 @@ public final class Configuration {
         return attempts > 0 && min < max;
     }
 
+    @Override
+    public String toString() {
+        return "Configuration{" 
+            + "max=" + max 
+            + ", min=" + min 
+            + ", attempts=" + attempts 
+            + '}';
+    }
+
     /**
      * Pattern builder: used here because:
-     * 
+     * <p>
      * - all the parameters of the Configuration class have a default value, which
      * means that we would like to have all the possible combinations of
      * constructors (one with three parameters, three with two parameters, three
      * with a single parameter), which are way too many and confusing to use
-     * 
+     * <p>
      * - moreover, it would be impossible to provide all of them, because they are
      * all of the same type, and only a single constructor can exist with a given
      * list of parameter types.
-     * 
+     * <p>
      * - the Configuration class has three parameters of the same type, and it is
-     * unclear to understand, in a call to its contructor, which is which. By using
+     * unclear to understand, in a call to its constructor, which is which. By using
      * the builder, we emulate the so-called "named arguments".
      * 
      */
@@ -70,7 +78,7 @@ public final class Configuration {
         private int min = MIN;
         private int max = MAX;
         private int attempts = ATTEMPTS;
-        private boolean consumed = false;
+        private boolean consumed;
 
         /**
          * @param min the minimum value
@@ -109,14 +117,5 @@ public final class Configuration {
             consumed = true;
             return new Configuration(max, min, attempts);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Configuration{" +
-                "max=" + max +
-                ", min=" + min +
-                ", attempts=" + attempts +
-                '}';
     }
 }
