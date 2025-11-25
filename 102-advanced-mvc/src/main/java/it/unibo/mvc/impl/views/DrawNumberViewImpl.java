@@ -1,4 +1,4 @@
-package it.unibo.mvc.impl;
+package it.unibo.mvc.impl.views;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 import it.unibo.mvc.api.DrawNumberView;
 import it.unibo.mvc.api.DrawNumberViewObserver;
+import it.unibo.mvc.impl.DrawResult;
 
 /**
  * Graphical {@link DrawNumberView} implementation.

@@ -9,5 +9,5 @@ repositories {
 }
 
 application {
-    mainClass.set("it.unibo.mvc.DrawNumberApp")
+    mainClass.set("it.unibo.mvc.impl.DrawNumberApp")
 }
