@@ -48,7 +48,7 @@ public final class MusicGroupImpl implements MusicGroup {
     public Stream<String> albumInYear(final int year) {
         return this.albums.entrySet().stream()
             .filter(entry -> entry.getValue() == year)
-            .map(Map.Entry::getKey);
+            .map(Entry::getKey);
     }
 
     @Override
@@ -90,8 +90,7 @@ public final class MusicGroupImpl implements MusicGroup {
     public Optional<String> longestAlbum() {
         return this.songs.stream()
             .collect(Collectors.groupingBy(Song::getAlbumName, Collectors.summingDouble(Song::getDuration)))
-            .entrySet()
-            .stream()
+            .entrySet().stream()
             .max(Comparator.comparing(Entry::getValue))
             .flatMap(Entry::getKey);
     }
